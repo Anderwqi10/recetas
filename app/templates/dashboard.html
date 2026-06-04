@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Panel — Recetas{% endblock %}
+{% block body %}
+<div class="dashboard-layout">
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">🍳</span>
+      <h1>Recetas</h1>
+    </div>
+    <div class="user-badge">
+      <span>Hola, <strong>{{ user.username }}</strong></span>
+      <a href="/logout" class="btn-outline">Cerrar sesión</a>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    {% if flash %}
+    <div class="alert alert-success" style="position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:10;max-width:90%;">
+      {{ flash }}
+    </div>
+    {% endif %}
+    <div class="welcome-card">
+      <div class="emoji">👨‍🍳</div>
+      <h2>¡Bienvenido, {{ user.username }}!</h2>
+      <p>Has iniciado sesión correctamente. Aquí podrás gestionar tus recetas favoritas.</p>
+    </div>
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión — Recetas{% endblock %}
+{% block body %}
+<div class="auth-layout">
+  <div class="auth-card">
+    <div class="brand">
+      <span class="brand-icon">🍳</span>
+      <h1>Recetas</h1>
+      <p>Tu cocina, tus recetas</p>
+    </div>
+
+    {% if request.cookies.get('flash') %}
+    <div class="alert alert-success">{{ request.cookies.get('flash') }}</div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+
+    <form method="post" action="/login">
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tu@correo.com"
+          value="{{ email or '' }}"
+          required
+          autocomplete="email"
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          required
+          autocomplete="current-password"
+        >
+      </div>
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+
+    <p class="auth-footer">
+      ¿No tienes cuenta? <a href="/register">Regístrate</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
