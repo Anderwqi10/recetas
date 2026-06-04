@@ -13,17 +13,36 @@
     </div>
   </header>
 
-  <main class="dashboard-main">
+  <main class="dashboard-content">
+    <div id="toast" class="alert alert-success toast" hidden></div>
     {% if flash %}
-    <div class="alert alert-success" style="position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:10;max-width:90%;">
-      {{ flash }}
-    </div>
+    <div class="alert alert-success">{{ flash }}</div>
     {% endif %}
-    <div class="welcome-card">
-      <div class="emoji">👨‍🍳</div>
-      <h2>¡Bienvenido, {{ user.username }}!</h2>
-      <p>Has iniciado sesión correctamente. Aquí podrás gestionar tus recetas favoritas.</p>
-    </div>
+
+    <section class="panel">
+      <h2>🥕 Mi inventario</h2>
+      <p class="muted">Registra los ingredientes que tienes en casa.</p>
+      <form id="ingredient-form" class="inline-form">
+        <input type="text" id="ingredient-name" placeholder="Ej. tomate" required maxlength="80">
+        <input type="text" id="ingredient-qty" placeholder="Cantidad (opcional)" maxlength="40">
+        <button type="submit" class="btn-primary btn-sm">Añadir</button>
+      </form>
+      <ul id="ingredient-list" class="ingredient-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>✨ Generar receta</h2>
+      <p class="muted">Necesitas al menos 2 ingredientes. Usamos OpenRouter para crear la receta.</p>
+      <textarea id="extra-notes" rows="2" placeholder="Notas opcionales (ej. sin gluten, para 2 personas)"></textarea>
+      <button type="button" id="btn-generate" class="btn-primary">Generar receta con IA</button>
+    </section>
+
+    <section class="panel panel-wide">
+      <h2>📖 Mis recetas</h2>
+      <p class="muted">Califica, guarda o elimina las recetas generadas.</p>
+      <div id="recipe-list" class="recipe-list"></div>
+    </section>
   </main>
 </div>
+<script src="/static/js/app.js"></script>
 {% endblock %}
