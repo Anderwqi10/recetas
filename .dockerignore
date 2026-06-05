@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+venv
+.venv
+recetas.db
+data/
+README.md
+tests/
+pytest.ini
