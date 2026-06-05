@@ -1,5 +1,6 @@
 from unittest.mock import AsyncMock, patch
 
+
 SAMPLE_LLM_JSON = """
 {
   "title": "Revuelto de huevo y tomate",
@@ -36,9 +37,11 @@ def test_api_create_ingredient_duplicate_rejected(client, auth_headers):
     assert response.status_code == 400
 
 
+
 def test_api_list_ingredients_requires_auth(client):
     response = client.get("/api/ingredients")
     assert response.status_code == 401
+
 
 
 @patch("app.routers.recipes.call_openrouter", new_callable=AsyncMock)
@@ -56,10 +59,12 @@ def test_api_generate_recipe(mock_openrouter, client, auth_headers):
     mock_openrouter.assert_called_once()
 
 
+
 def test_api_generate_recipe_requires_min_ingredients(client, auth_headers):
     client.post("/api/ingredients", json={"name": "Solo uno"}, headers=auth_headers)
     response = client.post("/api/recipes/generate", headers=auth_headers)
     assert response.status_code == 400
+
 
 
 @patch("app.routers.recipes.call_openrouter", new_callable=AsyncMock)
